@@ -1,12 +1,12 @@
 'use client';
 import React from 'react';
 import { useState, useRef, useEffect } from 'react';
-import { 
-  Send, 
-  Mic, 
-  Plus, 
-  Image as ImageIcon, 
-  Menu, 
+import {
+  Send,
+  Mic,
+  Plus,
+  Image as ImageIcon,
+  Menu,
   Wallet,
   Sparkles,
   Code,
@@ -47,10 +47,10 @@ export default function App() {
 
     // Simulate AI response
     setTimeout(() => {
-      const aiMsg = { 
-        id: Date.now() + 1, 
-        text: "I've analyzed the request. Connect your wallet to proceed with the transaction verification.", 
-        sender: 'bot' 
+      const aiMsg = {
+        id: Date.now() + 1,
+        text: "I've analyzed the request. Connect your wallet to proceed with the transaction verification.",
+        sender: 'bot'
       };
       setMessages(prev => [...prev, aiMsg]);
       setIsTyping(false);
@@ -66,10 +66,10 @@ export default function App() {
 
   return (
     <div className="flex h-screen bg-zinc-950 text-zinc-100 font-sans overflow-hidden selection:bg-blue-500/30">
-      
+
       {/* Mobile Sidebar Overlay */}
       {isSidebarOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/60 z-20 md:hidden backdrop-blur-sm"
           onClick={() => setIsSidebarOpen(false)}
         />
@@ -80,18 +80,18 @@ export default function App() {
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col relative w-full transition-all duration-300">
-        
+
         {/* Top Navigation Bar */}
         <header className="absolute top-0 left-0 right-0 h-16 flex items-center justify-between px-4 z-10 bg-gradient-to-b from-zinc-950 via-zinc-950/80 to-transparent">
           <div className="flex items-center gap-3">
             {/* Toggle Button - Visible when sidebar is closed or on mobile */}
-            <button 
+            <button
               onClick={toggleSidebar}
               className={`p-2 hover:bg-zinc-800 rounded-lg text-zinc-400 transition-colors ${isSidebarOpen ? 'md:hidden' : 'flex'}`}
             >
               {isSidebarOpen ? <Menu className="w-5 h-5" /> : <PanelLeftOpen className="w-5 h-5" />}
             </button>
-            
+
             {/* Logo in Header - Only visible when sidebar is closed on desktop, or always on mobile */}
             <div className={`font-bold text-lg bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent ${isSidebarOpen ? 'md:hidden' : 'block'}`}>
               Zchat
@@ -110,7 +110,7 @@ export default function App() {
         {/* Chat Area */}
         <main className="flex-1 overflow-y-auto px-4 pt-20 pb-40 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent">
           <div className="max-w-3xl mx-auto w-full">
-            
+
             {messages.length === 0 ? (
               // Empty State / Welcome Screen
               <div className="mt-12 md:mt-24 fade-in-up">
@@ -124,24 +124,24 @@ export default function App() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                  <SuggestionCard 
-                    icon={Code} 
-                    text="show my portfolio" 
+                  <SuggestionCard
+                    icon={Code}
+                    text="show my portfolio"
                     onClick={() => setInput("show my portfolio")}
                   />
-                  <SuggestionCard 
-                    icon={Compass} 
-                    text="i want to swap 3 zec to near" 
+                  <SuggestionCard
+                    icon={Compass}
+                    text="i want to swap 3 zec to near"
                     onClick={() => setInput("i want to swap 3 zec to near")}
                   />
-                  <SuggestionCard 
-                    icon={Lightbulb} 
-                    text="buy me a 100 $ amazon gift card" 
+                  <SuggestionCard
+                    icon={Lightbulb}
+                    text="buy me a 100 $ amazon gift card"
                     onClick={() => setInput("buy me a 100 $ amazon gift card")}
                   />
-                  <SuggestionCard 
-                    icon={Sparkles} 
-                    text="I want to donate 2 Zec to children cancer research" 
+                  <SuggestionCard
+                    icon={Sparkles}
+                    text="I want to donate 2 Zec to children cancer research"
                     onClick={() => setInput("I want to donate 2 Zec to children cancer research")}
                   />
                 </div>
@@ -156,13 +156,12 @@ export default function App() {
                         <Sparkles className="w-4 h-4 text-white" />
                       </div>
                     )}
-                    
-                    <div 
-                      className={`max-w-[85%] md:max-w-[75%] px-5 py-3.5 rounded-2xl text-sm md:text-base leading-relaxed ${
-                        msg.sender === 'user' 
-                          ? 'bg-zinc-800 text-zinc-100 rounded-tr-sm' 
-                          : 'bg-transparent text-zinc-100 rounded-tl-sm'
-                      }`}
+
+                    <div
+                      className={`max-w-[85%] md:max-w-[75%] px-5 py-3.5 rounded-2xl text-sm md:text-base leading-relaxed ${msg.sender === 'user'
+                        ? 'bg-zinc-800 text-zinc-100 rounded-tr-sm'
+                        : 'bg-transparent text-zinc-100 rounded-tl-sm'
+                        }`}
                     >
                       {msg.text}
                     </div>
@@ -174,17 +173,17 @@ export default function App() {
                     )}
                   </div>
                 ))}
-                
+
                 {isTyping && (
                   <div className="flex gap-4">
-                     <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex-shrink-0 flex items-center justify-center mt-1">
-                        <Sparkles className="w-4 h-4 text-white animate-pulse" />
-                      </div>
-                      <div className="flex items-center gap-1.5 h-10 px-2">
-                        <div className="w-2 h-2 bg-zinc-600 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-                        <div className="w-2 h-2 bg-zinc-600 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-                        <div className="w-2 h-2 bg-zinc-600 rounded-full animate-bounce"></div>
-                      </div>
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex-shrink-0 flex items-center justify-center mt-1">
+                      <Sparkles className="w-4 h-4 text-white animate-pulse" />
+                    </div>
+                    <div className="flex items-center gap-1.5 h-10 px-2">
+                      <div className="w-2 h-2 bg-zinc-600 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                      <div className="w-2 h-2 bg-zinc-600 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                      <div className="w-2 h-2 bg-zinc-600 rounded-full animate-bounce"></div>
+                    </div>
                   </div>
                 )}
                 <div ref={messagesEndRef} />
@@ -197,7 +196,7 @@ export default function App() {
         <div className={`fixed bottom-0 right-0 p-4 pb-6 bg-gradient-to-t from-zinc-950 via-zinc-950 to-transparent z-20 transition-all duration-300 ease-in-out ${isSidebarOpen ? 'left-0 md:left-64' : 'left-0'}`}>
           <div className="max-w-3xl mx-auto">
             <div className="relative flex items-end gap-2 bg-zinc-800/80 backdrop-blur-xl border border-zinc-700/50 rounded-[2rem] p-2 shadow-2xl transition-all duration-300 focus-within:ring-2 focus-within:ring-blue-500/20 focus-within:border-zinc-600">
-              
+
               {/* Left Action Button */}
               <button className="p-3 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-700 rounded-full transition-colors flex-shrink-0">
                 <Plus className="w-5 h-5" />
@@ -219,9 +218,9 @@ export default function App() {
                 <button className="p-2 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-700 rounded-full transition-colors" title="Upload Image">
                   <ImageIcon className="w-5 h-5" />
                 </button>
-                
+
                 {input.trim().length > 0 ? (
-                  <button 
+                  <button
                     onClick={handleSend}
                     className="p-2 bg-blue-500 hover:bg-blue-400 text-white rounded-full transition-all duration-200 transform hover:scale-105 shadow-lg shadow-blue-500/20"
                   >
@@ -234,7 +233,7 @@ export default function App() {
                 )}
               </div>
             </div>
-            
+
             <div className="text-center mt-3">
               <p className="text-[10px] text-zinc-500">
                 Zchat AI can make mistakes. Verify important info on-chain.
