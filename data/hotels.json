@@ -1,0 +1,297 @@
+[
+    {
+        "id": 1,
+        "name": "ZCash Grand Hotel & Resort",
+        "location": "Miami Beach, Florida",
+        "description": "Luxurious oceanfront resort with world-class amenities, private beach access, and stunning panoramic views.",
+        "rating": 4.8,
+        "walletAddress": "utest1hotel1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9",
+        "rooms": [
+            {
+                "id": 101,
+                "type": "Deluxe Ocean View",
+                "price": "15 ZEC/night",
+                "capacity": 2,
+                "amenities": [
+                    "King Bed",
+                    "Ocean View",
+                    "Mini Bar",
+                    "WiFi",
+                    "Smart TV"
+                ],
+                "imageUrl": "/hotel-images/zcash-grand-deluxe.jpg"
+            },
+            {
+                "id": 102,
+                "type": "Premium Suite",
+                "price": "25 ZEC/night",
+                "capacity": 4,
+                "amenities": [
+                    "2 Bedrooms",
+                    "Living Room",
+                    "Ocean View",
+                    "Jacuzzi",
+                    "Balcony"
+                ],
+                "imageUrl": "/hotel-images/zcash-grand-suite.jpg"
+            },
+            {
+                "id": 103,
+                "type": "Presidential Suite",
+                "price": "50 ZEC/night",
+                "capacity": 6,
+                "amenities": [
+                    "3 Bedrooms",
+                    "Private Pool",
+                    "Butler Service",
+                    "Panoramic View",
+                    "Full Kitchen"
+                ],
+                "imageUrl": "/hotel-images/zcash-grand-presidential.jpg"
+            }
+        ],
+        "amenities": [
+            "Spa",
+            "Pool",
+            "Restaurant",
+            "Gym",
+            "Beach Access"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Privacy Paradise Inn",
+        "location": "Aspen, Colorado",
+        "description": "Exclusive mountain retreat offering privacy, luxury, and breathtaking alpine scenery year-round.",
+        "rating": 4.9,
+        "walletAddress": "utest1hotel2z9y8x7w6v5u4t3s2r1q0p9o8n7m6l5k4j3",
+        "rooms": [
+            {
+                "id": 201,
+                "type": "Mountain View Room",
+                "price": "12 ZEC/night",
+                "capacity": 2,
+                "amenities": [
+                    "Queen Bed",
+                    "Mountain View",
+                    "Fireplace",
+                    "WiFi",
+                    "Coffee Maker"
+                ],
+                "imageUrl": "/hotel-images/privacy-paradise-mountain.jpg"
+            },
+            {
+                "id": 202,
+                "type": "Alpine Suite",
+                "price": "22 ZEC/night",
+                "capacity": 4,
+                "amenities": [
+                    "2 Bedrooms",
+                    "Private Balcony",
+                    "Fireplace",
+                    "Kitchenette",
+                    "Ski Storage"
+                ],
+                "imageUrl": "/hotel-images/privacy-paradise-alpine.jpg"
+            },
+            {
+                "id": 203,
+                "type": "Chalet Villa",
+                "price": "45 ZEC/night",
+                "capacity": 8,
+                "amenities": [
+                    "4 Bedrooms",
+                    "Private Hot Tub",
+                    "Full Kitchen",
+                    "Game Room",
+                    "Mountain View"
+                ],
+                "imageUrl": "/hotel-images/privacy-paradise-chalet.jpg"
+            }
+        ],
+        "amenities": [
+            "Ski-in/Ski-out",
+            "Spa",
+            "Restaurant",
+            "Heated Pool",
+            "Fire Pit"
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Blockchain Bay Hotel",
+        "location": "San Francisco, California",
+        "description": "Modern boutique hotel in the heart of the tech district, perfect for business and leisure travelers.",
+        "rating": 4.6,
+        "walletAddress": "utest1hotel3i8u7y6t5r4e3w2q1a0s9d8f7g6h5j4k3l2",
+        "rooms": [
+            {
+                "id": 301,
+                "type": "Urban Studio",
+                "price": "10 ZEC/night",
+                "capacity": 2,
+                "amenities": [
+                    "Queen Bed",
+                    "City View",
+                    "Work Desk",
+                    "WiFi",
+                    "Smart Home"
+                ],
+                "imageUrl": "/hotel-images/blockchain-bay-studio.jpg"
+            },
+            {
+                "id": 302,
+                "type": "Executive Suite",
+                "price": "18 ZEC/night",
+                "capacity": 3,
+                "amenities": [
+                    "Bedroom",
+                    "Living Area",
+                    "City View",
+                    "Office Space",
+                    "Premium WiFi"
+                ],
+                "imageUrl": "/hotel-images/blockchain-bay-executive.jpg"
+            },
+            {
+                "id": 303,
+                "type": "Penthouse",
+                "price": "40 ZEC/night",
+                "capacity": 4,
+                "amenities": [
+                    "2 Bedrooms",
+                    "Rooftop Terrace",
+                    "Bay View",
+                    "Full Kitchen",
+                    "Home Theater"
+                ],
+                "imageUrl": "/hotel-images/blockchain-bay-penthouse.jpg"
+            }
+        ],
+        "amenities": [
+            "Rooftop Bar",
+            "Gym",
+            "Co-working Space",
+            "Restaurant",
+            "Conference Rooms"
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Crypto Oasis Resort",
+        "location": "Dubai, UAE",
+        "description": "Opulent desert resort combining traditional Arabian hospitality with cutting-edge luxury and blockchain technology.",
+        "rating": 5.0,
+        "walletAddress": "utest1hotel4m5n6b7v8c9x0z1a2s3d4f5g6h7j8k9l0p1",
+        "rooms": [
+            {
+                "id": 401,
+                "type": "Desert View Room",
+                "price": "20 ZEC/night",
+                "capacity": 2,
+                "amenities": [
+                    "King Bed",
+                    "Desert View",
+                    "Luxury Bath",
+                    "Mini Bar",
+                    "WiFi"
+                ],
+                "imageUrl": "/hotel-images/crypto-oasis-desert.jpg"
+            },
+            {
+                "id": 402,
+                "type": "Royal Suite",
+                "price": "35 ZEC/night",
+                "capacity": 4,
+                "amenities": [
+                    "2 Bedrooms",
+                    "Private Pool",
+                    "Butler",
+                    "Majlis",
+                    "Premium Amenities"
+                ],
+                "imageUrl": "/hotel-images/crypto-oasis-royal.jpg"
+            },
+            {
+                "id": 403,
+                "type": "Palace Villa",
+                "price": "80 ZEC/night",
+                "capacity": 10,
+                "amenities": [
+                    "5 Bedrooms",
+                    "Private Beach",
+                    "Infinity Pool",
+                    "Chef Service",
+                    "Spa Room"
+                ],
+                "imageUrl": "/hotel-images/crypto-oasis-palace.jpg"
+            }
+        ],
+        "amenities": [
+            "Private Beach",
+            "World-class Spa",
+            "Multiple Restaurants",
+            "Dubai Mall Access",
+            "Helipad"
+        ]
+    },
+    {
+        "id": 5,
+        "name": "ZEC Harbor Boutique",
+        "location": "Seattle, Washington",
+        "description": "Charming waterfront boutique hotel offering personalized service and stunning Puget Sound views.",
+        "rating": 4.7,
+        "walletAddress": "utest1hotel5o6p7i8u9y0t1r2e3w4q5a6s7d8f9g0h1j2",
+        "rooms": [
+            {
+                "id": 501,
+                "type": "Harbor Room",
+                "price": "11 ZEC/night",
+                "capacity": 2,
+                "amenities": [
+                    "Queen Bed",
+                    "Water View",
+                    "Coffee Bar",
+                    "WiFi",
+                    "Rain Shower"
+                ],
+                "imageUrl": "/hotel-images/zec-harbor-room.jpg"
+            },
+            {
+                "id": 502,
+                "type": "Waterfront Suite",
+                "price": "20 ZEC/night",
+                "capacity": 3,
+                "amenities": [
+                    "Bedroom",
+                    "Living Room",
+                    "Balcony",
+                    "Water View",
+                    "Kitchenette"
+                ],
+                "imageUrl": "/hotel-images/zec-harbor-waterfront.jpg"
+            },
+            {
+                "id": 503,
+                "type": "Captain's Loft",
+                "price": "35 ZEC/night",
+                "capacity": 5,
+                "amenities": [
+                    "2 Bedrooms",
+                    "Rooftop Deck",
+                    "Full Kitchen",
+                    "Fireplace",
+                    "Panoramic View"
+                ],
+                "imageUrl": "/hotel-images/zec-harbor-captains.jpg"
+            }
+        ],
+        "amenities": [
+            "Waterfront Dining",
+            "Marina Access",
+            "Kayak Rentals",
+            "Wine Bar",
+            "Concierge"
+        ]
+    }
+]

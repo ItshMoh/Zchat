@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "name": "Children's Cancer Research Foundation",
+        "description": "Leading pediatric cancer research organization dedicated to finding cures and advancing treatment protocols for childhood cancers.",
+        "impact": "Over 15,000 children helped annually",
+        "established": "2010",
+        "location": "Boston, MA",
+        "walletAddress": "utest1qwer7y8u9i0p1a2s3d4f5g6h7j8k9l0zx1c2v3b4n5m6q",
+        "focus": [
+            "Leukemia Research",
+            "Brain Tumor Treatment",
+            "Clinical Trials"
+        ],
+        "successRate": "82% improved survival rate",
+        "fundingGoal": "50 ZEC monthly"
+    },
+    {
+        "id": 2,
+        "name": "Hope for Kids Cancer Alliance",
+        "description": "Global initiative providing free treatment and support for children battling cancer in underserved communities.",
+        "impact": "30,000+ families supported worldwide",
+        "established": "2008",
+        "location": "New York, NY",
+        "walletAddress": "utest1asdf5g6h7j8k9l0p1o2i3u4y5t6r7e8w9q0a1s2d3",
+        "focus": [
+            "Treatment Access",
+            "Family Support",
+            "Medical Equipment"
+        ],
+        "successRate": "90% treatment completion rate",
+        "fundingGoal": "75 ZEC monthly"
+    },
+    {
+        "id": 3,
+        "name": "Little Warriors Cancer Fund",
+        "description": "Innovative research center focusing on immunotherapy and precision medicine for pediatric oncology patients.",
+        "impact": "5,000 clinical trial participants",
+        "established": "2015",
+        "location": "San Francisco, CA",
+        "walletAddress": "utest1zxcv8b9n0m1q2w3e4r5t6y7u8i9o0p1a2s3d4f5g6",
+        "focus": [
+            "Immunotherapy",
+            "Genetic Research",
+            "Drug Development"
+        ],
+        "successRate": "75% remission rate in trials",
+        "fundingGoal": "100 ZEC monthly"
+    },
+    {
+        "id": 4,
+        "name": "Bright Future Kids Foundation",
+        "description": "Comprehensive care organization offering treatment, psychological support, and rehabilitation for child cancer patients.",
+        "impact": "12,000 children treated successfully",
+        "established": "2012",
+        "location": "Chicago, IL",
+        "walletAddress": "utest1mnbv4c5x6z7a8s9d0f1g2h3j4k5l6p7o8i9u0y1t2",
+        "focus": [
+            "Holistic Care",
+            "Mental Health",
+            "Survivorship Programs"
+        ],
+        "successRate": "88% long-term survival",
+        "fundingGoal": "60 ZEC monthly"
+    },
+    {
+        "id": 5,
+        "name": "Guardian Angels Pediatric Cancer Institute",
+        "description": "Research and treatment facility specializing in rare pediatric cancers with state-of-the-art technology and compassionate care.",
+        "impact": "8,000+ rare cancer cases treated",
+        "established": "2009",
+        "location": "Seattle, WA",
+        "walletAddress": "utest1poiu3y4t5r6e7w8q9a0s1d2f3g4h5j6k7l8z9x0c1",
+        "focus": [
+            "Rare Cancers",
+            "Advanced Diagnostics",
+            "Personalized Therapy"
+        ],
+        "successRate": "70% success rate in rare cases",
+        "fundingGoal": "85 ZEC monthly"
+    }
+]

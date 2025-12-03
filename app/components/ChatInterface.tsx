@@ -17,15 +17,23 @@ import {
 import Sidebar from './Sidebar';
 import SuggestionCard from './SuggestionCard';
 
+interface Message {
+  id: number;
+  text: string;
+  sender: 'user' | 'bot';
+}
+
 // --- Main App Component ---
 
 export default function App() {
   // Default to open on larger screens
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const messagesEndRef = useRef(null);
+  const [isWalletConnected, setIsWalletConnected] = useState(false);
+  const [walletAddress] = useState('utest14ay3pwkzrp24hssupus9wamx6r8tqcfr8z0vn58t7ytar4xaw7lks98');
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
@@ -40,14 +48,14 @@ export default function App() {
   const handleSend = () => {
     if (!input.trim()) return;
 
-    const userMsg = { id: Date.now(), text: input, sender: 'user' };
+    const userMsg: Message = { id: Date.now(), text: input, sender: 'user' };
     setMessages(prev => [...prev, userMsg]);
     setInput('');
     setIsTyping(true);
 
     // Simulate AI response
     setTimeout(() => {
-      const aiMsg = {
+      const aiMsg: Message = {
         id: Date.now() + 1,
         text: "I've analyzed the request. Connect your wallet to proceed with the transaction verification.",
         sender: 'bot'
@@ -57,7 +65,7 @@ export default function App() {
     }, 1500);
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSend();
@@ -100,9 +108,23 @@ export default function App() {
 
           {/* Right Side Icons */}
           <div className="flex items-center gap-2">
-            <button className="flex items-center gap-2 px-3 py-1.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 rounded-full text-zinc-300 transition-all group">
-              <span className="text-sm font-medium hidden sm:block">Connect</span>
-              <Wallet className="w-4 h-4 text-blue-400 group-hover:text-blue-300" />
+            <button
+              onClick={() => setIsWalletConnected(!isWalletConnected)}
+              className="flex items-center gap-2 px-3 py-1.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 rounded-full text-zinc-300 transition-all group"
+            >
+              {isWalletConnected ? (
+                <>
+                  <span className="text-sm font-mono text-green-400 hidden sm:block">
+                    {walletAddress.slice(0, 8)}...{walletAddress.slice(-6)}
+                  </span>
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                </>
+              ) : (
+                <>
+                  <span className="text-sm font-medium hidden sm:block">Connect</span>
+                  <Wallet className="w-4 h-4 text-blue-400 group-hover:text-blue-300" />
+                </>
+              )}
             </button>
           </div>
         </header>
@@ -123,26 +145,16 @@ export default function App() {
                   </h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <SuggestionCard
-                    icon={Code}
-                    text="show my portfolio"
-                    onClick={() => setInput("show my portfolio")}
-                  />
-                  <SuggestionCard
-                    icon={Compass}
-                    text="i want to swap 3 zec to near"
-                    onClick={() => setInput("i want to swap 3 zec to near")}
+                    icon={Sparkles}
+                    text="I want to donate 2 ZEC to children cancer research"
+                    onClick={() => setInput("I want to donate 2 ZEC to children cancer research")}
                   />
                   <SuggestionCard
                     icon={Lightbulb}
-                    text="buy me a 100 $ amazon gift card"
-                    onClick={() => setInput("buy me a 100 $ amazon gift card")}
-                  />
-                  <SuggestionCard
-                    icon={Sparkles}
-                    text="I want to donate 2 Zec to children cancer research"
-                    onClick={() => setInput("I want to donate 2 Zec to children cancer research")}
+                    text="Book a hotel in Miami for 3 nights"
+                    onClick={() => setInput("Book a hotel in Miami for 3 nights")}
                   />
                 </div>
               </div>
