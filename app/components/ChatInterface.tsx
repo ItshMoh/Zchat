@@ -39,7 +39,7 @@ export default function App() {
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [isWalletConnected, setIsWalletConnected] = useState(false);
-  const [walletAddress] = useState('utest14ay3pwkzrp24hssupus9wamx6r8tqcfr8z0vn58t7ytar4xaw7lks98');
+  const [walletAddress] = useState('tmNXjJVuWeFeyHXoAjo29xzqmWELnjdCQ2d');
   const [chatId, setChatId] = useState<string>('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
