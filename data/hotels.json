@@ -5,7 +5,7 @@
         "location": "Denver, Colorado",
         "description": "Luxurious oceanfront resort with world-class amenities, private beach access, and stunning panoramic views.",
         "rating": 4.8,
-        "walletAddress": "utest1hotel1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9",
+        "walletAddress": "tmKD4JSCVD6s5BrY2ZFDfoD7TVncF8FBxMt",
         "hotelImage": "/hotel-images/hotel-1.jpg",
         "rooms": [
             {
@@ -19,8 +19,7 @@
                     "Mini Bar",
                     "WiFi",
                     "Smart TV"
-                ],
-                "imageUrl": "/hotel-images/zcash-grand-deluxe.jpg"
+                ]
             },
             {
                 "id": 102,
@@ -33,8 +32,7 @@
                     "Ocean View",
                     "Jacuzzi",
                     "Balcony"
-                ],
-                "imageUrl": "/hotel-images/zcash-grand-suite.jpg"
+                ]
             },
             {
                 "id": 103,
@@ -47,8 +45,7 @@
                     "Butler Service",
                     "Panoramic View",
                     "Full Kitchen"
-                ],
-                "imageUrl": "/hotel-images/zcash-grand-presidential.jpg"
+                ]
             }
         ],
         "amenities": [
@@ -79,8 +76,7 @@
                     "Fireplace",
                     "WiFi",
                     "Coffee Maker"
-                ],
-                "imageUrl": "/hotel-images/privacy-paradise-mountain.jpg"
+                ]
             },
             {
                 "id": 202,
@@ -93,8 +89,7 @@
                     "Fireplace",
                     "Kitchenette",
                     "Ski Storage"
-                ],
-                "imageUrl": "/hotel-images/privacy-paradise-alpine.jpg"
+                ]
             },
             {
                 "id": 203,
@@ -107,8 +102,7 @@
                     "Full Kitchen",
                     "Game Room",
                     "Mountain View"
-                ],
-                "imageUrl": "/hotel-images/privacy-paradise-chalet.jpg"
+                ]
             }
         ],
         "amenities": [
@@ -139,8 +133,7 @@
                     "Work Desk",
                     "WiFi",
                     "Smart Home"
-                ],
-                "imageUrl": "/hotel-images/blockchain-bay-studio.jpg"
+                ]
             },
             {
                 "id": 302,
@@ -153,8 +146,7 @@
                     "City View",
                     "Office Space",
                     "Premium WiFi"
-                ],
-                "imageUrl": "/hotel-images/blockchain-bay-executive.jpg"
+                ]
             },
             {
                 "id": 303,
@@ -167,8 +159,7 @@
                     "Bay View",
                     "Full Kitchen",
                     "Home Theater"
-                ],
-                "imageUrl": "/hotel-images/blockchain-bay-penthouse.jpg"
+                ]
             }
         ],
         "amenities": [
@@ -181,7 +172,7 @@
     },
     {
         "id": 4,
-        "name": "Desert Palms Dubai",
+        "name": "Desert Palms ",
         "location": "Colorado Springs, Colorado",
         "description": "Opulent desert resort combining traditional Arabian hospitality with cutting-edge luxury.",
         "rating": 5.0,
@@ -199,8 +190,7 @@
                     "Luxury Bath",
                     "Mini Bar",
                     "WiFi"
-                ],
-                "imageUrl": "/hotel-images/crypto-oasis-desert.jpg"
+                ]
             },
             {
                 "id": 402,
@@ -213,8 +203,7 @@
                     "Butler",
                     "Majlis",
                     "Premium Amenities"
-                ],
-                "imageUrl": "/hotel-images/crypto-oasis-royal.jpg"
+                ]
             },
             {
                 "id": 403,
@@ -227,8 +216,7 @@
                     "Infinity Pool",
                     "Chef Service",
                     "Spa Room"
-                ],
-                "imageUrl": "/hotel-images/crypto-oasis-palace.jpg"
+                ]
             }
         ],
         "amenities": [
@@ -259,8 +247,7 @@
                     "Coffee Bar",
                     "WiFi",
                     "Rain Shower"
-                ],
-                "imageUrl": "/hotel-images/zec-harbor-room.jpg"
+                ]
             },
             {
                 "id": 502,
@@ -273,8 +260,7 @@
                     "Balcony",
                     "Water View",
                     "Kitchenette"
-                ],
-                "imageUrl": "/hotel-images/zec-harbor-waterfront.jpg"
+                ]
             },
             {
                 "id": 503,
@@ -287,8 +273,7 @@
                     "Full Kitchen",
                     "Fireplace",
                     "Panoramic View"
-                ],
-                "imageUrl": "/hotel-images/zec-harbor-captains.jpg"
+                ]
             }
         ],
         "amenities": [

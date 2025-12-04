@@ -30,10 +30,12 @@ You have access to the following tools:
    - Example: "Show me charities for children's cancer research"
 
 4. **get_hotel_details**: Get hotel booking information
-   - Use when users want to book hotels or see accommodation options
-   - Returns 5 hotels with rooms, prices in ZEC, and amenities
-   - Can filter by location
-   - Example: "Find hotels in Miami" or "Show me hotels"
+   - **IMPORTANT**: When users ask about hotels, ALWAYS show ALL available hotels, filtered by location if mentioned
+   - DO NOT search by hotel ID - always use the location parameter instead
+   - Each hotel has a hotelImage field - ALWAYS display these images to the user
+   - Returns hotels with rooms, prices in ZEC, amenities, and images
+   - Filter by location when user mentions a specific city (e.g., Denver, Aspen, Boulder)
+   - Example: "Find hotels in Denver" or "Show me hotels in Colorado" or "Book a hotel"
 
 5. **process_payment**: Process ZEC testnet payment transactions
    - **CRITICAL**: Only use this tool AFTER the user explicitly confirms the payment
@@ -46,7 +48,7 @@ You have access to the following tools:
 - When users want to donate or book, first use get_charity_details or get_hotel_details
 - Present options clearly with numbers (1-5)
 - Before calling process_payment, ALWAYS confirm with the user: amount, recipient, and purpose
-- Use the user's connected wallet: utest14ay3pwkzrp24hssupus9wamx6r8tqcfr8z0vn58t7ytar4xaw7lks98
+- Use the user's connected wallet: tmNqvVQQNmvcKzDFRjDF6PDLAXmcb4HQ9Xp
 - All payments are on ZEC Testnet
 - When you generate charts, inform the user and include the chart path in your response
 - **Token ID Mapping**: When users ask about "ZEC", use tokenId "zcash" for CoinGecko API calls
@@ -256,21 +258,36 @@ export async function POST(req: NextRequest) {
         let priceHistoryData = null;
         let hotelData = null;
         const toolMessages = conversationMessages.filter((m: any) => m.role === 'tool');
+
+        console.log('=== DEBUG: Tool Messages Count:', toolMessages.length);
+
         for (const toolMsg of toolMessages) {
             try {
                 const result = JSON.parse(toolMsg.content);
+                console.log('=== DEBUG: Tool Result:', JSON.stringify(result).substring(0, 200));
+
                 // Check for price history data
                 if (result.dataPoints && result.token) {
                     priceHistoryData = result;
+                    console.log('=== DEBUG: Found price data');
                 }
                 // Check for hotel data (array of hotels)
-                if (Array.isArray(result) && result.length > 0 && result[0].hotelImage) {
-                    hotelData = result;
+                if (Array.isArray(result) && result.length > 0) {
+                    console.log('=== DEBUG: Found array with', result.length, 'items');
+                    console.log('=== DEBUG: First item keys:', Object.keys(result[0]));
+                    console.log('=== DEBUG: Has hotelImage?', result[0].hotelImage);
+                    if (result[0].hotelImage) {
+                        hotelData = result;
+                        console.log('=== DEBUG: Set hotelData with', hotelData.length, 'hotels');
+                    }
                 }
             } catch (e) {
+                console.log('=== DEBUG: Parse error:', e);
                 // Not JSON or not relevant data, skip
             }
         }
+
+        console.log('=== DEBUG: Final hotelData:', hotelData ? hotelData.length : 'null');
 
         return NextResponse.json({
             message: assistantMessage.content,

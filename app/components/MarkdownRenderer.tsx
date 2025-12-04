@@ -2,7 +2,6 @@
 import React from 'react';
 import { parseMarkdown, ParsedElement } from '@/app/utils/markdown-parser';
 import PriceChart from './PriceChart';
-import Image from 'next/image';
 import { MapPin, Star } from 'lucide-react';
 
 interface MarkdownRendererProps {
@@ -73,13 +72,11 @@ export default function MarkdownRenderer({ content, priceData, hotelData }: Mark
                         >
                             {/* Hotel Image */}
                             {hotel.hotelImage && (
-                                <div className="relative w-full h-48 bg-zinc-800">
-                                    <Image
+                                <div className="relative w-full h-48 bg-zinc-800 overflow-hidden">
+                                    <img
                                         src={hotel.hotelImage}
                                         alt={hotel.name}
-                                        fill
-                                        className="object-cover"
-                                        sizes="(max-width: 768px) 100vw, 600px"
+                                        className="w-full h-full object-cover"
                                     />
                                 </div>
                             )}

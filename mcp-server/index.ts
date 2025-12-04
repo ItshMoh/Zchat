@@ -236,7 +236,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
             },
             {
                 name: 'get_hotel_details',
-                description: 'Fetch hotel booking details. Can get all hotels, filter by location, or get a specific hotel by ID (1-5)',
+                description: 'Fetch hotel booking details. Returns all hotels filtered by location. Do not use hotelId - always search by location to show all available hotels with their images.',
                 inputSchema: {
                     type: 'object',
                     properties: {
@@ -246,7 +246,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
                         },
                         location: {
                             type: 'string',
-                            description: 'Filter hotels by location (e.g., Miami, Dubai, Seattle)',
+                            description: 'Filter hotels by location (e.g., Denver, Aspen, Boulder, Colorado Springs, Vail)',
                         },
                     },
                 },
