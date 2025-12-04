@@ -3,9 +3,9 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 import { addChat, ChatMessage } from '@/lib/mongodb';
 
-// OpenRouter configuration
+// NEAR configuration
 const NEAR_URL = 'https://cloud-api.near.ai/v1/chat/completions';
-const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+const NEAR_API_KEY = process.env.NEAR_API_KEY;
 const SITE_URL = process.env.SITE_URL || 'http://localhost:3000';
 
 // System prompt with tool descriptions
@@ -142,9 +142,9 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        if (!OPENROUTER_API_KEY) {
+        if (!NEAR_API_KEY) {
             return NextResponse.json(
-                { error: 'OpenRouter API key not configured' },
+                { error: 'NEAR API key not configured' },
                 { status: 500 }
             );
         }
@@ -152,12 +152,12 @@ export async function POST(req: NextRequest) {
         // Get MCP tools
         const tools = await getMCPTools();
 
-        // Helper function to call OpenRouter API
-        async function callOpenRouter(conversationMessages: any[]) {
+        // Helper function to call NEAR API
+        async function callNEAR(conversationMessages: any[]) {
             const response = await fetch(NEAR_URL, {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+                    'Authorization': `Bearer ${NEAR_API_KEY}`,
                     'Content-Type': 'application/json',
                     'HTTP-Referer': SITE_URL,
                     'X-Title': 'ZChat',
@@ -176,7 +176,7 @@ export async function POST(req: NextRequest) {
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({}));
                 throw new Error(
-                    `OpenRouter API error: ${response.status} - ${errorData.error?.message || response.statusText}`
+                    `NEAR API error: ${response.status} - ${errorData.error?.message || response.statusText}`
                 );
             }
 
@@ -184,7 +184,7 @@ export async function POST(req: NextRequest) {
         }
 
         // Make initial LLM call
-        let apiResponse = await callOpenRouter(messages);
+        let apiResponse = await callNEAR(messages);
         let assistantMessage = apiResponse.choices[0].message;
         const conversationMessages = [...messages];
 
@@ -223,7 +223,7 @@ export async function POST(req: NextRequest) {
             conversationMessages.push(...toolResults);
 
             // Get next LLM response
-            apiResponse = await callOpenRouter(conversationMessages);
+            apiResponse = await callNEAR(conversationMessages);
             assistantMessage = apiResponse.choices[0].message;
         }
 
