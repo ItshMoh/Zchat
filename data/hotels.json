@@ -1,11 +1,12 @@
 [
     {
         "id": 1,
-        "name": "ZCash Grand Hotel & Resort",
-        "location": "Miami Beach, Florida",
+        "name": "Grand Oceana Resort",
+        "location": "Denver, Colorado",
         "description": "Luxurious oceanfront resort with world-class amenities, private beach access, and stunning panoramic views.",
         "rating": 4.8,
         "walletAddress": "utest1hotel1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9",
+        "hotelImage": "/hotel-images/hotel-1.jpg",
         "rooms": [
             {
                 "id": 101,
@@ -60,11 +61,12 @@
     },
     {
         "id": 2,
-        "name": "Privacy Paradise Inn",
+        "name": "Aspen Alpine Lodge",
         "location": "Aspen, Colorado",
         "description": "Exclusive mountain retreat offering privacy, luxury, and breathtaking alpine scenery year-round.",
         "rating": 4.9,
         "walletAddress": "utest1hotel2z9y8x7w6v5u4t3s2r1q0p9o8n7m6l5k4j3",
+        "hotelImage": "/hotel-images/hotel-2.jpg",
         "rooms": [
             {
                 "id": 201,
@@ -119,11 +121,12 @@
     },
     {
         "id": 3,
-        "name": "Blockchain Bay Hotel",
-        "location": "San Francisco, California",
+        "name": "Bay View Hotel",
+        "location": "Boulder, Colorado",
         "description": "Modern boutique hotel in the heart of the tech district, perfect for business and leisure travelers.",
         "rating": 4.6,
         "walletAddress": "utest1hotel3i8u7y6t5r4e3w2q1a0s9d8f7g6h5j4k3l2",
+        "hotelImage": "/hotel-images/hotel-3.jpg",
         "rooms": [
             {
                 "id": 301,
@@ -178,11 +181,12 @@
     },
     {
         "id": 4,
-        "name": "Crypto Oasis Resort",
-        "location": "Dubai, UAE",
-        "description": "Opulent desert resort combining traditional Arabian hospitality with cutting-edge luxury and blockchain technology.",
+        "name": "Desert Palms Dubai",
+        "location": "Colorado Springs, Colorado",
+        "description": "Opulent desert resort combining traditional Arabian hospitality with cutting-edge luxury.",
         "rating": 5.0,
         "walletAddress": "utest1hotel4m5n6b7v8c9x0z1a2s3d4f5g6h7j8k9l0p1",
+        "hotelImage": "/hotel-images/hotel-4.jpg",
         "rooms": [
             {
                 "id": 401,
@@ -237,11 +241,12 @@
     },
     {
         "id": 5,
-        "name": "ZEC Harbor Boutique",
-        "location": "Seattle, Washington",
+        "name": "Harbor View Boutique",
+        "location": "Vail, Colorado",
         "description": "Charming waterfront boutique hotel offering personalized service and stunning Puget Sound views.",
         "rating": 4.7,
         "walletAddress": "utest1hotel5o6p7i8u9y0t1r2e3w4q5a6s7d8f9g0h1j2",
+        "hotelImage": "/hotel-images/hotel-5.jpg",
         "rooms": [
             {
                 "id": 501,

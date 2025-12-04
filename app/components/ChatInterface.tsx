@@ -16,11 +16,18 @@ import {
 } from 'lucide-react';
 import Sidebar from './Sidebar';
 import SuggestionCard from './SuggestionCard';
+import MarkdownRenderer from './MarkdownRenderer';
 
 interface Message {
   id: number;
   text: string;
   sender: 'user' | 'bot';
+  priceData?: {
+    token: string;
+    currency: string;
+    dataPoints: { date: string; price: number }[];
+  };
+  hotelData?: any[];
 }
 
 // --- Main App Component ---
@@ -33,6 +40,7 @@ export default function App() {
   const [isTyping, setIsTyping] = useState(false);
   const [isWalletConnected, setIsWalletConnected] = useState(false);
   const [walletAddress] = useState('utest14ay3pwkzrp24hssupus9wamx6r8tqcfr8z0vn58t7ytar4xaw7lks98');
+  const [chatId, setChatId] = useState<string>('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
@@ -45,8 +53,44 @@ export default function App() {
     scrollToBottom();
   }, [messages, isTyping]);
 
+  // Initialize or load chat session
+  useEffect(() => {
+    // Check if there's an existing chat_id in localStorage
+    let existingChatId = localStorage.getItem('current_chat_id');
+
+    if (!existingChatId) {
+      // Generate new chat_id
+      existingChatId = `chat_${Date.now()}_${Math.random().toString(36).substring(7)}`;
+      localStorage.setItem('current_chat_id', existingChatId);
+    }
+
+    setChatId(existingChatId);
+
+    // Load existing messages for this chat
+    const loadChatHistory = async () => {
+      try {
+        const response = await fetch(`/api/chat/history?chat_id=${existingChatId}&wallet_id=${walletAddress}`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data.messages && data.messages.length > 0) {
+            const loadedMessages = data.messages.map((msg: any, index: number) => ({
+              id: Date.now() + index,
+              text: msg.content,
+              sender: msg.role === 'user' ? 'user' : 'bot'
+            }));
+            setMessages(loadedMessages);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to load chat history:', error);
+      }
+    };
+
+    loadChatHistory();
+  }, [walletAddress]);
+
   const handleSend = async () => {
-    if (!input.trim()) return;
+    if (!input.trim() || !chatId) return;
 
     const userMsg: Message = { id: Date.now(), text: input, sender: 'user' };
     setMessages(prev => [...prev, userMsg]);
@@ -54,7 +98,7 @@ export default function App() {
     setIsTyping(true);
 
     try {
-      // Send to LLM API
+      // Send to LLM API with chat persistence
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
@@ -65,6 +109,8 @@ export default function App() {
             role: msg.sender === 'user' ? 'user' : 'assistant',
             content: msg.text,
           })),
+          chat_id: chatId,
+          wallet_id: walletAddress,
         }),
       });
 
@@ -77,7 +123,9 @@ export default function App() {
       const aiMsg: Message = {
         id: Date.now() + 1,
         text: data.message || "I'm here to help! Ask me about token prices, charities, or hotel bookings.",
-        sender: 'bot'
+        sender: 'bot',
+        priceData: data.priceData || undefined,
+        hotelData: data.hotelData || undefined,
       };
 
       setMessages(prev => [...prev, aiMsg]);
@@ -199,12 +247,16 @@ export default function App() {
                     )}
 
                     <div
-                      className={`max-w-[85%] md:max-w-[75%] px-5 py-3.5 rounded-2xl text-sm md:text-base leading-relaxed ${msg.sender === 'user'
+                      className={`max-w-[85%] md:max-w-[75%] px-5 py-3.5 rounded-2xl text-sm md:text-base leading-relaxed${msg.sender === 'user'
                         ? 'bg-zinc-800 text-zinc-100 rounded-tr-sm'
                         : 'bg-transparent text-zinc-100 rounded-tl-sm'
                         }`}
                     >
-                      {msg.text}
+                      {msg.sender === 'bot' ? (
+                        <MarkdownRenderer content={msg.text} priceData={msg.priceData} hotelData={msg.hotelData} />
+                      ) : (
+                        msg.text
+                      )}
                     </div>
 
                     {msg.sender === 'user' && (

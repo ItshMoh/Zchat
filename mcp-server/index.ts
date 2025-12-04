@@ -42,6 +42,12 @@ const PaymentSchema = z.object({
     purpose: z.string().optional().describe('Purpose of payment (e.g., donation, hotel booking)'),
 });
 
+const GetPriceHistorySchema = z.object({
+    tokenId: z.string().describe('CoinGecko token ID (e.g., zcash, bitcoin, ethereum)'),
+    days: z.number().optional().default(7).describe('Number of days of history (default: 7)'),
+    currency: z.string().optional().default('usd').describe('Currency for price (default: usd)'),
+});
+
 // Create MCP Server
 const server = new Server(
     {
@@ -123,15 +129,9 @@ async function processPayment(amount: number, recipientAddress: string, purpose?
     // Simulate 3 second processing delay
     await new Promise(resolve => setTimeout(resolve, 3000));
 
-    // Generate mock transaction hash
-    const txHash = `0x${Array.from({ length: 64 }, () =>
-        Math.floor(Math.random() * 16).toString(16)
-    ).join('')}`;
-
     return {
         status: 'success',
         message: 'Payment processed successfully',
-        transactionHash: txHash,
         amount: amount,
         currency: 'ZEC',
         recipient: recipientAddress,
@@ -139,6 +139,63 @@ async function processPayment(amount: number, recipientAddress: string, purpose?
         timestamp: new Date().toISOString(),
         network: 'ZEC Testnet',
     };
+}
+
+// Tool 5: Get Price History (returns data for frontend chart rendering)
+async function getPriceHistory(tokenId: string, days: number = 7, currency: string = 'usd') {
+    try {
+        console.error(`[getPriceHistory] Fetching data for ${tokenId}, ${days} days, ${currency}`);
+
+        // Fetch historical data from CoinGecko
+        const response = await fetch(
+            `https://api.coingecko.com/api/v3/coins/${tokenId}/market_chart?vs_currency=${currency}&days=${days}&interval=daily`
+        );
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error(`[getPriceHistory] CoinGecko API error: ${response.status} - ${errorText}`);
+            throw new Error(`CoinGecko API error: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        console.error(`[getPriceHistory] Received ${data.prices?.length || 0} price points`);
+
+        if (!data.prices || data.prices.length === 0) {
+            throw new Error(`No price data found for ${tokenId}`);
+        }
+
+        // Extract one price per day (take the first price of each day)
+        const dailyPrices: { date: string; price: number }[] = [];
+        const seenDates = new Set<string>();
+
+        for (const [timestamp, price] of data.prices) {
+            const date = new Date(timestamp);
+            const dateStr = date.toISOString().split('T')[0]; // YYYY-MM-DD
+
+            if (!seenDates.has(dateStr)) {
+                seenDates.add(dateStr);
+                dailyPrices.push({
+                    date: dateStr,
+                    price: price
+                });
+            }
+        }
+
+        console.error(`[getPriceHistory] Extracted ${dailyPrices.length} daily prices`);
+
+        return {
+            token: tokenId,
+            currency: currency.toUpperCase(),
+            days: days,
+            dataPoints: dailyPrices,
+            minPrice: Math.min(...dailyPrices.map(d => d.price)),
+            maxPrice: Math.max(...dailyPrices.map(d => d.price)),
+            currentPrice: dailyPrices[dailyPrices.length - 1].price,
+        };
+    } catch (error: any) {
+        console.error(`[getPriceHistory] Error: ${error.message}`, error.stack);
+        throw new Error(`Failed to fetch price history: ${error.message}`);
+    }
 }
 
 // List available tools
@@ -216,6 +273,30 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
                     required: ['amount', 'recipientAddress'],
                 },
             },
+            {
+                name: 'get_price_history',
+                description: 'Get historical price data for a cryptocurrency token and generate a price chart. Returns daily price points and a chart image',
+                inputSchema: {
+                    type: 'object',
+                    properties: {
+                        tokenId: {
+                            type: 'string',
+                            description: 'CoinGecko token ID (e.g., zcash, bitcoin, ethereum)',
+                        },
+                        days: {
+                            type: 'number',
+                            description: 'Number of days of history to fetch (default: 7)',
+                            default: 7,
+                        },
+                        currency: {
+                            type: 'string',
+                            description: 'Currency for price (default: usd)',
+                            default: 'usd',
+                        },
+                    },
+                    required: ['tokenId'],
+                },
+            },
         ],
     };
 });
@@ -271,6 +352,23 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
                     validated.amount,
                     validated.recipientAddress,
                     validated.purpose
+                );
+                return {
+                    content: [
+                        {
+                            type: 'text',
+                            text: JSON.stringify(result, null, 2),
+                        },
+                    ],
+                };
+            }
+
+            case 'get_price_history': {
+                const validated = GetPriceHistorySchema.parse(args);
+                const result = await getPriceHistory(
+                    validated.tokenId,
+                    validated.days,
+                    validated.currency
                 );
                 return {
                     content: [
