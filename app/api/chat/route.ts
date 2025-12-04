@@ -4,7 +4,7 @@ import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js'
 import { addChat, ChatMessage } from '@/lib/mongodb';
 
 // OpenRouter configuration
-const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
+const NEAR_URL = 'https://cloud-api.near.ai/v1/chat/completions';
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 const SITE_URL = process.env.SITE_URL || 'http://localhost:3000';
 
@@ -48,7 +48,7 @@ You have access to the following tools:
 - When users want to donate or book, first use get_charity_details or get_hotel_details
 - Present options clearly with numbers (1-5)
 - Before calling process_payment, ALWAYS confirm with the user: amount, recipient, and purpose
-- Use the user's connected wallet: tmNqvVQQNmvcKzDFRjDF6PDLAXmcb4HQ9Xp
+- Use the user's connected wallet: utest14ay3pwkzrp24hssupus9wamx6r8tqcfr8z0vn58t7ytar4xaw7lks98
 - All payments are on ZEC Testnet
 - When you generate charts, inform the user and include the chart path in your response
 - **Token ID Mapping**: When users ask about "ZEC", use tokenId "zcash" for CoinGecko API calls
@@ -154,7 +154,7 @@ export async function POST(req: NextRequest) {
 
         // Helper function to call OpenRouter API
         async function callOpenRouter(conversationMessages: any[]) {
-            const response = await fetch(OPENROUTER_API_URL, {
+            const response = await fetch(NEAR_URL, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
@@ -163,7 +163,7 @@ export async function POST(req: NextRequest) {
                     'X-Title': 'ZChat',
                 },
                 body: JSON.stringify({
-                    model: 'openai/gpt-4.1-nano',
+                    model: 'deepseek-ai/DeepSeek-V3.1',
                     messages: [
                         { role: 'system', content: SYSTEM_PROMPT },
                         ...conversationMessages,
