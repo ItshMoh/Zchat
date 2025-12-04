@@ -45,7 +45,7 @@ export default function App() {
     scrollToBottom();
   }, [messages, isTyping]);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!input.trim()) return;
 
     const userMsg: Message = { id: Date.now(), text: input, sender: 'user' };
@@ -53,16 +53,45 @@ export default function App() {
     setInput('');
     setIsTyping(true);
 
-    // Simulate AI response
-    setTimeout(() => {
+    try {
+      // Send to LLM API
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messages: [...messages, userMsg].map(msg => ({
+            role: msg.sender === 'user' ? 'user' : 'assistant',
+            content: msg.text,
+          })),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to get response from AI');
+      }
+
+      const data = await response.json();
+
       const aiMsg: Message = {
         id: Date.now() + 1,
-        text: "I've analyzed the request. Connect your wallet to proceed with the transaction verification.",
+        text: data.message || "I'm here to help! Ask me about token prices, charities, or hotel bookings.",
         sender: 'bot'
       };
+
       setMessages(prev => [...prev, aiMsg]);
+    } catch (error) {
+      console.error('Error:', error);
+      const errorMsg: Message = {
+        id: Date.now() + 1,
+        text: "Sorry, I'm having trouble connecting. Please try again.",
+        sender: 'bot'
+      };
+      setMessages(prev => [...prev, errorMsg]);
+    } finally {
       setIsTyping(false);
-    }, 1500);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
